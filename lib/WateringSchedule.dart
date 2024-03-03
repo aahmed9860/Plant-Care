@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Navigation.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:vm_service/utils.dart';
 class WateringSchedule extends StatefulWidget {
   const WateringSchedule({super.key});
 
@@ -23,8 +24,8 @@ class _WateringScheduleState extends State<WateringSchedule> {
       ),
       body: TableCalendar(
         firstDay: DateTime.utc(2024, 1, 01),
-        lastDay: DateTime.utc(2024, 1, 01),
-        focusedDay: DateTime.now(),
+        lastDay: DateTime.utc(2024, 12, 30),
+        focusedDay: _focusedDay,
         calendarFormat: _calendarFormat,
         selectedDayPredicate: (day) {
           return isSameDay(_selectedDay, day);
