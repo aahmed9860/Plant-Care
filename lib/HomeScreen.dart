@@ -1,10 +1,22 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'Navigation.dart';
+import 'WateringSchedule.dart';
+import 'utils.dart';
+import 'package:table_calendar/table_calendar.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScrenState();
+}
+
+class _HomeScrenState extends State<HomeScreen> {
+  
+  
   @override
   Widget build(BuildContext context) =>Scaffold(
      drawer: const Navigation(),
@@ -12,17 +24,28 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.green,
       title: Text('Plant Care'),
      ),
+
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-    
+        const Text(
+          'Plants that need to be watered today',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
         Padding(
           padding: EdgeInsets.all(10),
           child: Container(
             width: 400,
             height: 100,
             color: Colors.blueGrey,
-            child: Text('This is where I think watering schedule should go'),
+            child: Column(),
+
           ),
+          
         ),
          Padding(
           padding: EdgeInsets.all(10),
@@ -57,4 +80,5 @@ class HomeScreen extends StatelessWidget {
 
      ),
     );
-}
+  }
+

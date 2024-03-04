@@ -14,7 +14,7 @@ class _WateringScheduleState extends State<WateringSchedule> {
   late final ValueNotifier<List<Event>> _selectedEvents;
   CalendarFormat _calendarFormat = CalendarFormat.month;
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
-      .toggledOff; // Can be toggled on/off by longpressing a date
+      .toggledOff;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   DateTime? _rangeStart;
@@ -27,6 +27,7 @@ class _WateringScheduleState extends State<WateringSchedule> {
 
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+
   }
 
   @override
@@ -87,7 +88,8 @@ class _WateringScheduleState extends State<WateringSchedule> {
     return Scaffold(
       drawer: const Navigation(),
       appBar: AppBar(
-        title: Text('TableCalendar - Events'),
+        title: Text('Watering Schedule'),
+        backgroundColor: Colors.blue,
       ),
       body: Column(
         children: [
@@ -102,6 +104,10 @@ class _WateringScheduleState extends State<WateringSchedule> {
             rangeSelectionMode: _rangeSelectionMode,
             eventLoader: _getEventsForDay,
             startingDayOfWeek: StartingDayOfWeek.monday,
+            calendarBuilders: CalendarBuilders(
+              dowBuilder: (context, day){
+              }
+            ),
             calendarStyle: CalendarStyle(
               // Use `CalendarStyle` to customize the UI
               outsideDaysVisible: false,
