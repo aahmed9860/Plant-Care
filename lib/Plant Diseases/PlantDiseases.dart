@@ -4,6 +4,14 @@ import 'package:flutter/widgets.dart';
 import '../Navigation.dart';
 import 'DiseaseDetails.dart';
 
+class ImageData{
+  final String imagePath;
+  
+  ImageData({
+    required this.imagePath,
+  });
+}
+
 class PlantDiseases extends StatefulWidget {
    PlantDiseases({super.key});
 
@@ -16,7 +24,7 @@ class PlantDiseases extends StatefulWidget {
   "Powdery Mildew",
   "Downy Mildew",
   "Black Spot",
-  "Canker",
+  "Citrus Canker",
   "Fusarium Wilt",
   "Apple Scab",
   "Gray Mold",
@@ -54,19 +62,20 @@ final List <String> cures =[
   "Cures of Damping",
 ];
 
-List imfList = [
-  Image.asset(''),
-  Image.asset(''),
-  Image.asset(''),
-  Image.asset(''),
-  Image.asset(''),
-  Image.asset(''),
-  Image.asset(''),
-  Image.asset(''),
-  Image.asset(''),
-  Image.asset(''),
-  Image.asset(''),
-  Image.asset(''),
+List<String> diseasePictures = [
+  'assets/images/diseasePictures/blight.jpg',
+  'assets/images/diseasePictures/powdery-mildew.jpg',
+  'assets/images/diseasePictures/downy-mildew.jpg',
+  'assets/images/diseasePictures/black-spot.jpg',
+  'assets/images/diseasePictures/citrus-canker.jpg',
+  'assets/images/diseasePictures/fusarium-wilt.jpg',
+  'assets/images/diseasePictures/apple-scab.jpg',
+  'assets/images/diseasePictures/gray-mold.jpg',
+  'assets/images/diseasePictures/root-rot.jpg',
+  'assets/images/diseasePictures/blossom-end-rot.jpg',
+  'assets/images/diseasePictures/chlorosis.jpg',
+  'assets/images/diseasePictures/damping-off.jpg'
+
 ];
 
 
@@ -81,10 +90,13 @@ class _PlantDiseasesState extends State<PlantDiseases> {
       
       ),
       body: ListView.builder(
+
        itemCount: diseases.length,
        itemBuilder:(context,index){
           return ListTile(
-              title: Text(diseases[index]),
+              title: Text(diseases[index],
+              style: const TextStyle(fontSize: 20)),
+              leading: Image.asset(diseasePictures[index]),
             onTap:(){
               Navigator.push(
                 context,
@@ -94,8 +106,8 @@ class _PlantDiseasesState extends State<PlantDiseases> {
               );
             },
             shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.amberAccent, width: 1.5),
-              borderRadius: BorderRadius.circular(10),
+              side: BorderSide(color: Colors.black, width: 5),
+              borderRadius: BorderRadius.circular(0),
               
             ),
           );

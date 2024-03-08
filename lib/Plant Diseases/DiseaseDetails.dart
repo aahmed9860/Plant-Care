@@ -19,7 +19,7 @@ DiseaseDetails({required this.diseaseName, required this.diseaseSymptoms, requir
       body: Padding( 
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text( //listing ingredients
               "Symptoms:",
@@ -33,7 +33,14 @@ DiseaseDetails({required this.diseaseName, required this.diseaseSymptoms, requir
             ),
             Text(diseaseCure), //received from HomeScreen
             SizedBox(height:20),
+            ElevatedButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+              child: const Text("Return to Disease List?"),
+            )
           ],
+          
         ),
         ),
     );
