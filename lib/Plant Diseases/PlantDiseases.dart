@@ -3,10 +3,15 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import '../Navigation.dart';
 import 'DiseaseDetails.dart';
-class PlantDiseases extends StatelessWidget {
-  PlantDiseases({super.key});
 
-final List<String> diseases= [
+class PlantDiseases extends StatefulWidget {
+   PlantDiseases({super.key});
+
+  @override
+  State<PlantDiseases> createState() => _PlantDiseasesState();
+  }
+
+  final List<String> diseases= [
   "Blight",
   "Powdery Mildew",
   "Downy Mildew",
@@ -21,10 +26,10 @@ final List<String> diseases= [
   "Damping Off",
 ];
 final List <String> symptoms =[
-  "Symptoms of Blight",
-  "Symptoms of Powdery Mildew",
+  "A bacterial disease that appears as yellow or red spots, sometimes accomponied with a type of yellow slime. If let spread, the bacteria can kill the entire plant or infect the seeds inside. ",
+  "",
   "Symptoms of Downy Mildew",
-  "Symptoms of Black Spot",
+  "A common plant disease that is most commonly found among roses, but is not exclusive, as these spots also appear on other garrden plants. A fungal disease that causes black round spots to appear.",
   "Symptoms of Canker",
   "Symptoms of Fusarium Wilt",
   "Symptoms of Apple Scab",
@@ -46,14 +51,32 @@ final List <String> cures =[
   "Cures of Root Rot",
   "Cures of Blossom End Rot",
   "Cures of Chlorosis",
-  "Cures of Damping Off",
+  "Cures of Damping",
 ];
-  @override
+
+List imfList = [
+  Image.asset(''),
+  Image.asset(''),
+  Image.asset(''),
+  Image.asset(''),
+  Image.asset(''),
+  Image.asset(''),
+  Image.asset(''),
+  Image.asset(''),
+  Image.asset(''),
+  Image.asset(''),
+  Image.asset(''),
+  Image.asset(''),
+];
+
+
+class _PlantDiseasesState extends State<PlantDiseases> {
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const Navigation(),
       appBar: AppBar(
-        title:Text('Plant Diseases'),
+        title: const Text('Plant Diseases'),
         backgroundColor: Colors.purple,
       
       ),
@@ -81,9 +104,5 @@ final List <String> cures =[
       ),
     );
   }
-}
 
-
-
-
- 
+}  

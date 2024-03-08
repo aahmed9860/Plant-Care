@@ -40,7 +40,7 @@ class _InputPlantsState extends State<InputPlants> {
     return Scaffold(
       drawer: const Navigation(),
       appBar: AppBar(
-        title: Text('Input Plants'),
+        title: const Text('Input Plants'),
         backgroundColor: Colors.pink,
       ),
       body: Padding(
@@ -75,7 +75,7 @@ class _InputPlantsState extends State<InputPlants> {
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter the watering schedule';
+                    return 'Please how often the plant needs to be watered in the format dd:hh:ss';
                   }
                   return null;
                 },
