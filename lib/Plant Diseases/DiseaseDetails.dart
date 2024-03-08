@@ -25,13 +25,15 @@ DiseaseDetails({required this.diseaseName, required this.diseaseSymptoms, requir
               "Symptoms:",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            Text(diseaseSymptoms), //received from HomeScreen
+             Text(diseaseSymptoms,
+            style: const TextStyle(fontSize: 18) ), //received from HomeScreen
             SizedBox(height: 20),
             const Text(
               "Cures:", //listing instructions
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            Text(diseaseCure), //received from HomeScreen
+            Text(diseaseCure,
+            style: const TextStyle(fontSize: 18)), //received from HomeScreen
             SizedBox(height:20),
             ElevatedButton(
               onPressed: (){

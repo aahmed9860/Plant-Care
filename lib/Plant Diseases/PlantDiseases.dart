@@ -35,8 +35,7 @@ class PlantDiseases extends StatefulWidget {
 ];
 final List <String> symptoms =[
   "A bacterial disease that appears as yellow or red spots, sometimes accomponied with a type of yellow slime. If let spread, the bacteria can kill the entire plant or infect the seeds inside. ",
-  "",
-  "Symptoms of Downy Mildew",
+  "A fungal disease that affects the foliage of a plant. The fungus spreads airbirne spores that it is spread more easily when leaves are wet, ie. during the rain. There are different species of downy mildew that usually effect different plants but carrots, grapevines, roses, peas, and spinach are highly susceptible. Look for discolored blotches on the top side of the leaf and mold growths on the underside. This disease can stunt the plant's growth or even kill it.",
   "A common plant disease that is most commonly found among roses, but is not exclusive, as these spots also appear on other garrden plants. A fungal disease that causes black round spots to appear.",
   "Symptoms of Canker",
   "Symptoms of Fusarium Wilt",
@@ -50,7 +49,7 @@ final List <String> symptoms =[
 final List <String> cures =[
   "Cures of Blight",
   "Cures of Powdery Mildew",
-  "Cures of Downy Mildew",
+  "Once infected, only prevention measures can be taken to reduce contagion. Picking off the infected leaves once symptoms arise is a solid method once identified. IF the fungus has taken over most of the plant, it's better to remove the plant and discard away from other plants. When watering, avoid watering at night, as the leaf wetness with lacking sunlight has a higher risk of spread. Crop rotaion can help if you suspect your soil has been infected with the spores.",
   "Cures of Black Spot",
   "Cures of Canker",
   "Cures of Fusarium Wilt",
