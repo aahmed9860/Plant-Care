@@ -17,6 +17,20 @@ class _InputPlantsState extends State<InputPlants> {
   final _speciesController = TextEditingController();
   final _wateringScheduleController = TextEditingController();
   File? _image;
+  final List<String> _sampleImage = [
+    'assets/images/plantPictures/rose.jpg',
+    'assets/images/plantPictures/hydrangea.jpg',
+    'assets/images/plantPictures/lily.jpg',
+    'assets/images/plantPictures/azelia.jpg',
+    'assets/images/plantPictures/dahlia.jpg',
+    'assets/images/plantPictures/tulip.jpg',
+  ];
+  String? _selectedImage;
+  
+  void initState(){
+    super.initState();
+    _selectedImage = _sampleImage[0];
+  }
 
   Future pickImage() async {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -25,6 +39,11 @@ class _InputPlantsState extends State<InputPlants> {
         _image = File(pickedFile.path);
       });
     }
+  }
+  void pickSampleImage(String imagePath) {
+    setState((){
+      _selectedImage = imagePath;
+    });
   }
 
     @override
@@ -81,12 +100,58 @@ class _InputPlantsState extends State<InputPlants> {
                 },
               ),
               const SizedBox(height: 20),
-              _image != null ? Image.file(_image!) : Text('No image selected.'),
+              _image  != null ? Image.file(_image!) : Text('No image selected.'),
               ElevatedButton(
                 onPressed: pickImage,
                 child: const Text('Pick an Image'),
               ),
+              const SizedBox(height:20),
+             ElevatedButton(
+                onPressed: () {
+                  showDialog(context: context, builder: (BuildContext context){
+                    return AlertDialog(
+                   title:  const  Text('Select Image'),
+                  content: Container(
+                    width: double.maxFinite,
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 4.0,
+                        mainAxisSpacing: 4.0,
+                      ),
+                      itemCount: _sampleImage.length,
+                      itemBuilder: (context, index) {
+                        final imagePath = _sampleImage[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            pickSampleImage(imagePath);
+                          },
+                          child: Image.asset(
+                            imagePath,
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+                child: const Text('Sample Images'),
+              ) ,
               const SizedBox(height: 20),
+              _selectedImage != null
+              ?Image.asset(
+                _selectedImage!,
+                width: 200,
+                height: 200,
+                fit: BoxFit.cover,
+
+              ):
+              const Text("No image selected"),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {

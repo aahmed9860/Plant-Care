@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'Navigation.dart';
 import 'WateringSchedule.dart';
 import 'utils.dart';
@@ -22,7 +21,7 @@ class _HomeScrenState extends State<HomeScreen> {
      drawer: const Navigation(),
      appBar: AppBar(
       backgroundColor: Colors.green,
-      title: Text('Plant Care'),
+      title: const Text('Plant Care'),
      ),
 
       body: Column(
@@ -37,27 +36,27 @@ class _HomeScrenState extends State<HomeScreen> {
         ),
 
         Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Container(
             width: 400,
             height: 100,
             color: Colors.blueGrey,
-            child: Column(),
+            child: const Column(),
 
           ),
           
         ),
          Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Container(
             width: 400,
             height: 100,
             color: Colors.blueGrey,
-            child: Text('I made container but I think they need to be something else' ),
+            child: const Text('I made container but I think they need to be something else' ),
           ),
         ),
          Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Container(
             width: 400,
             height: 100,
@@ -65,7 +64,7 @@ class _HomeScrenState extends State<HomeScreen> {
           ),
         ),
           Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Container(
             width: 400,
             height: 250,

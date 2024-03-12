@@ -88,7 +88,7 @@ class _WateringScheduleState extends State<WateringSchedule> {
     return Scaffold(
       drawer: const Navigation(),
       appBar: AppBar(
-        title: Text('Watering Schedule'),
+        title: const Text('Watering Schedule'),
         backgroundColor: Colors.blue,
       ),
       body: Column(
@@ -108,8 +108,7 @@ class _WateringScheduleState extends State<WateringSchedule> {
               dowBuilder: (context, day){
               }
             ),
-            calendarStyle: CalendarStyle(
-              // Use `CalendarStyle` to customize the UI
+            calendarStyle: const CalendarStyle(
               outsideDaysVisible: false,
             ),
             onDaySelected: _onDaySelected,

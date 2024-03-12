@@ -1,17 +1,16 @@
-import 'package:flutter/material.dart';
+/* import 'package:flutter/material.dart';
 
  abstract class ListItem{
   Widget buildTitle(BuildContext context);
 
   Widget buildTip(BuildContext context);
-  /*
+
 final tips = List<String>(
   ?HeadingItem('Watering Plants')
   : MessageItem('', 'You should water your plants every day'),
   
   
-)
-*/
+);
  }
 
  class HeadingItem implements ListItem{
@@ -42,4 +41,4 @@ final tips = List<String>(
 
   @override
   Widget buildTip(BuildContext context)=> Text(body);
- }
+ } */
