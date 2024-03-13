@@ -1,0 +1,41 @@
+name: plant_care
+description: "A new Flutter project."
+
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+
+  table_calendar: ^3.1.0
+
+  basic_utils: ^5.7.0
+
+  image_picker: ^0.8.5+3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^3.0.0
+
+
+
+
+flutter:
+  assets:  
+    - assets/images/diseasePictures/
+    - assets/images/plantPictures/
+  uses-material-design: true
+
+ 
