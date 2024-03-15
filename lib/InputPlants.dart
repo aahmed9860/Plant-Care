@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'Navigation.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-
+import 'ViewPlants.dart';
 
 class InputPlants extends StatefulWidget {
   const InputPlants({super.key});
@@ -158,6 +158,8 @@ class _InputPlantsState extends State<InputPlants> {
                     // Here, you would usually send the data to a database or a state management solution
                     // For now, just pop the screen
                     Navigator.pop(context);
+                
+                  
                   }
                 },
                 child: const Text('Submit'),
