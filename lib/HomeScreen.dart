@@ -107,7 +107,7 @@ void dispose(){
             height: 150,
             color: Colors.blueGrey,
             child: const Text(
-              '-Tips of the Day \n -TODO: \n -WATERING SCHEDULE \n -(possible calender package found) \n -Input Plants & View Plants (text controller?)  \n -LOGIN PAGE',
+              '-TODO: \n -WATERING SCHEDULE -(possible calender package found) \n -Input Plants & View Plants (text controller?)  \n -LOGIN PAGE \n -Updating plant disease \n -adding more tips',
             ),
           ),
           ),
