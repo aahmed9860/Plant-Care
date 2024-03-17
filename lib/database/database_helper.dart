@@ -53,4 +53,4 @@ import 'package:sqflite/sqflite.dart';
     Database db = await instance.database;
     return await db.query(table);
   }
-  }
+}

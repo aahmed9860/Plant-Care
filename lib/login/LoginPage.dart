@@ -3,6 +3,8 @@ import 'package:plant_care/homeScreen.dart';
 import 'package:plant_care/Navigation.dart';
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
   @override
 Widget build(BuildContext context) {
   return Scaffold(
@@ -10,8 +12,7 @@ Widget build(BuildContext context) {
       appBar: AppBar(
 
       ),
-      body: Container(       
-        child: Column(
+      body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
@@ -62,7 +63,6 @@ Widget build(BuildContext context) {
             ),
           ],
         ),
-      ),
     );
   }
 }
