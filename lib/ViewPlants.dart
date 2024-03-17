@@ -1,73 +1,87 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 import 'Navigation.dart';
+
 class ViewPlants extends StatefulWidget {
-  const ViewPlants({super.key});
+  const ViewPlants({Key? key}) : super(key: key);
 
   @override
   State<ViewPlants> createState() => _ViewPlantsState();
 }
 
 class _ViewPlantsState extends State<ViewPlants> {
-  late List<String> imageAssetNames;
+  late Future<List<Map<String, dynamic>>> _plantsFuture;
 
   @override
   void initState() {
     super.initState();
-    loadAssets();
+    _plantsFuture = _loadPlants();
   }
 
-  Future<void> loadAssets() async {
-    final manifestContent = await rootBundle.loadString('AssetManifest.json');
-    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
-    final imageAssetNames = manifestMap.keys.where((String key) => key.startsWith('asset/') && key.endsWith('.jpg')).toList();
-    setState(() {
-      this.imageAssetNames = imageAssetNames;
-    });
+  Future<List<Map<String, dynamic>>> _loadPlants() async {
+    final Database db = await _getDatabase();
+    return db.query('plants');
+  }
+
+  Future<Database> _getDatabase() async {
+    final databasesPath = await getDatabasesPath();
+    final path = join(databasesPath, 'PlantDatabase.db');
+    return openDatabase(path);
   }
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unnecessary_null_comparison
-    if (imageAssetNames == null) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('View Plants'),
-          backgroundColor: Colors.red,
-        ),
-        body: const Center(
-          child: CircularProgressIndicator(), // Show loading indicator while fetching assets
-        ),
-      );
-    }
-
     return Scaffold(
       drawer: Navigation(),
       appBar: AppBar(
-        title: const Text('View Plants'),
+        title: Text('View Plants'),
         backgroundColor: Colors.red,
       ),
-      body: ListView.builder(
-        itemCount: imageAssetNames.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: Column(
-              children: [
-                Image.asset(
-                  imageAssetNames[index],
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: 200,
-                ),
-                ListTile(
-                  title: Text('Plant ${index + 1}'),
-                  subtitle: Text('Description of ${imageAssetNames[index]}'),
-                ),
-              ],
-            ),
-          );
+      body: FutureBuilder<List<Map<String, dynamic>>>(
+        future: _plantsFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(
+              child: Text('No plants found.'),
+            );
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                final plant = snapshot.data![index];
+                return Card(
+                  child: Column(
+                    children: [
+                     
+                      Image.file(
+                        File(plant['plantImage']),
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: 200,
+                      ),
+                      ListTile(
+                        title: Text(plant['plantName']),
+                        subtitle: Text(plant['plantSpecies']),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          }
         },
       ),
     );

@@ -30,12 +30,12 @@ class _HomeScrenState extends State<HomeScreen> {
   
   int currentTipIndex= 0;
   late Timer timer;
-  
+  @override
   void initState(){
     super.initState();
   
 
-  timer = Timer.periodic(Duration(seconds: 20), (Timer t){
+  timer = Timer.periodic(const Duration(seconds: 10), (Timer t){
     setState((){
       currentTipIndex = (currentTipIndex +1) % tips.length;
     });
@@ -88,7 +88,7 @@ void dispose(){
         ),
       const Text('Tips for Plant Care! New Tip Every 20 Seconds!'),
          Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Container(
             width: 400,
             height: 200,
