@@ -90,11 +90,11 @@ class _InputPlantsState extends State<InputPlants> {
               ),
               TextFormField(
                 controller: _wateringScheduleController,
-                decoration: const InputDecoration(labelText: 'Watering Schedule (hours)'),
+                decoration: const InputDecoration(labelText: 'Watering Schedule (days)'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please how often the plant needs to be watered in the format dd:hh:ss';
+                    return 'Please how often the plant needs to be watered in days';
                   }
                   return null;
                 },
@@ -110,8 +110,8 @@ class _InputPlantsState extends State<InputPlants> {
                 onPressed: () {
                   showDialog(context: context, builder: (BuildContext context){
                     return AlertDialog(
-                   title:  const  Text('Select Image'),
-                  content: Container(
+                   title:  const Text('Select Image'),
+                  content: SizedBox(
                     width: double.maxFinite,
                     child: GridView.builder(
                       shrinkWrap: true,
