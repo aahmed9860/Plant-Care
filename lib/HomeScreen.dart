@@ -29,12 +29,12 @@ class _HomeScrenState extends State<HomeScreen> {
     'Look out for weeds growing near your plants. When weeding, ensure you grab from the base to get the roots. Also keep an eye on bugs and funguses for disease control.',
   ];
 
+
   int currentTipIndex = 0;
   late Timer timer;
   @override
   void initState() {
     super.initState();
-
     timer = Timer.periodic(const Duration(seconds: 8), (Timer t) {
       setState(() {
         currentTipIndex = (currentTipIndex + 1) % tips.length;
@@ -47,6 +47,7 @@ class _HomeScrenState extends State<HomeScreen> {
     super.dispose();
     timer.cancel();
   }
+
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -93,10 +94,12 @@ class _HomeScrenState extends State<HomeScreen> {
                 width: 400,
                 color: Colors.blueGrey,
                   child: SingleChildScrollView(
-                    child: const Text('hello'),
-                ),
+                  
+                      ),
+                    ),
+
               ),
-            ),
+            
             const Align(
               alignment: Alignment.center,
               child: Text(
