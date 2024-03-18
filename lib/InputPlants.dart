@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:plant_care/database/database_helper.dart';
 import 'Navigation.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'ViewPlants.dart';
+import 'package:sqflite/sqflite.dart';
+
 
 class InputPlants extends StatefulWidget {
-  const InputPlants({super.key});
+  const InputPlants({Key? key}) : super(key: key);
 
   @override
   State<InputPlants> createState() => _InputPlantsState();
@@ -26,13 +29,13 @@ class _InputPlantsState extends State<InputPlants> {
     'assets/images/plantPictures/tulip.jpg',
   ];
   String? _selectedImage;
-  
-  void initState(){
+
+  void initState() {
     super.initState();
     _selectedImage = _sampleImage[0];
   }
 
-  Future pickImage() async {
+  Future<void> pickImage() async {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
@@ -40,24 +43,26 @@ class _InputPlantsState extends State<InputPlants> {
       });
     }
   }
+
   void pickSampleImage(String imagePath) {
-    setState((){
+    setState(() {
       _selectedImage = imagePath;
     });
   }
 
-    @override
+  @override
   void dispose() {
     _nameController.dispose();
     _speciesController.dispose();
     _wateringScheduleController.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
-      drawer: const Navigation(),
+      drawer: Navigation(),
       appBar: AppBar(
         title: const Text('Input Plants'),
         backgroundColor: Colors.pink,
@@ -94,72 +99,69 @@ class _InputPlantsState extends State<InputPlants> {
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please how often the plant needs to be watered in days';
+                    return 'Please enter how often the plant needs to be watered in days';
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 20),
-              _image  != null ? Image.file(_image!) : Text('No image selected.'),
+              _image != null ? Image.file(_image!) : Text('No image selected.'),
               ElevatedButton(
                 onPressed: pickImage,
                 child: const Text('Pick an Image'),
               ),
-              const SizedBox(height:20),
-             ElevatedButton(
+              const SizedBox(height: 20),
+              ElevatedButton(
                 onPressed: () {
-                  showDialog(context: context, builder: (BuildContext context){
-                    return AlertDialog(
-                   title:  const Text('Select Image'),
-                  content: SizedBox(
-                    width: double.maxFinite,
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 4.0,
-                        mainAxisSpacing: 4.0,
-                      ),
-                      itemCount: _sampleImage.length,
-                      itemBuilder: (context, index) {
-                        final imagePath = _sampleImage[index];
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                            pickSampleImage(imagePath);
-                          },
-                          child: Image.asset(
-                            imagePath,
-                            fit: BoxFit.cover,
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Select Image'),
+                        content: SizedBox(
+                          width: double.maxFinite,
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 4.0,
+                              mainAxisSpacing: 4.0,
+                            ),
+                            itemCount: _sampleImage.length,
+                            itemBuilder: (context, index) {
+                              final imagePath = _sampleImage[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                  pickSampleImage(imagePath);
+                                },
+                                child: Image.asset(
+                                  imagePath,
+                                  fit: BoxFit.cover,
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                );
-              },
-            );
-          },
+                        ),
+                      );
+                    },
+                  );
+                },
                 child: const Text('Sample Images'),
-              ) ,
+              ),
               const SizedBox(height: 20),
               _selectedImage != null
-              ?Image.asset(
-                _selectedImage!,
-                width: 200,
-                height: 200,
-                fit: BoxFit.cover,
-
-              ):
-              const Text("No image selected"),
+                  ? Image.asset(
+                      _selectedImage!,
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    )
+                  : const Text("No image selected"),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // Here, you would usually send the data to a database or a state management solution
-                    // For now, just pop the screen
-                    Navigator.pop(context);
-                
-                  
+                    submitForm();
                   }
                 },
                 child: const Text('Submit'),
@@ -167,7 +169,27 @@ class _InputPlantsState extends State<InputPlants> {
             ],
           ),
         ),
-    ),
+      ),
     );
   }
+
+  DatabaseHelper dbHelper = DatabaseHelper();
+
+  void submitForm() {
+    if (_formKey.currentState!.validate()) {
+      // Get form data
+      String id = _nameController.text;
+      String species = _speciesController.text;
+      int wateringTime = int.parse(_wateringScheduleController.text); // Changed from wateringFrequency
+    String image = _selectedImage!;
+
+    // Insert data into database
+    dbHelper.insertPlant(Plant(
+      plantId: id,
+      plantSpecies: species,
+      plantWateringTime: wateringTime, // Changed from wateringFrequency
+      plantImage: image,
+    ));
+  }
+}
 }

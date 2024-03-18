@@ -1,56 +1,65 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
   class DatabaseHelper{
-    static const databaseName = "PlantDatabase.db";
-    static const databaseVersion = 1;
+    static final DatabaseHelper _instance= DatabaseHelper.internal();
+    late Database _database;
 
-    static const table = 'plants';
+    DatabaseHelper.internal();
 
-    static const plantID = '_id';
-    static const plantName = 'name';
-    static const plantSpecies = 'species';
-    static const plantWateringTime = 'watering_time';
-    static const plantImage = 'image';
-
-    DatabaseHelper.privateConstructor();
-    static final DatabaseHelper instance = DatabaseHelper.privateConstructor();
-
-    static Database? _database;
-
-    Future<Database> get database async{
-      if(_database != null ) return _database!;
-      _database = await _initDatabase();
-      return _database!;
-
+    factory DatabaseHelper(){
+      return _instance;
     }
-    _initDatabase() async{
-      Directory documentsDirectory = await getApplicationDocumentsDirectory();
-      String path = join(documentsDirectory.path, databaseName);
-      return await openDatabase(path,
-      version: databaseVersion, onCreate: _onCreate);
-    }
-    Future _onCreate(Database db, int version) async{
-      await db.execute('''
-        CREATE TABLE $table(
-          $plantID INTEGER PRIMARY KEY
-          $plantName TEXT NOT NULL,
-          $plantSpecies TEXT NOT NULL,
-          $plantWateringTime TEXT NOT NULL,
-          $plantImage TEXT
-        )
-      ''');
-    }
-    Future<int> insert(Map<String, dynamic> row) async {
-    Database db = await instance.database;
-    return await db.insert(table, row);
+
+
+ 
+Future<void> initDatabase() async {
+    _database = await openDatabase(
+      join(await getDatabasesPath(), 'plant_database.db'),
+      onCreate: (db, version) {
+        return db.execute(
+          'CREATE TABLE plants(id INTEGER PRIMARY KEY, species TEXT, wateringTime INTEGER, image TEXT)',
+        );
+      },
+      version: 1,
+    );
   }
 
-  Future<List<Map<String, dynamic>>> queryAllRows() async {
-    Database db = await instance.database;
-    return await db.query(table);
+  Future<void> insertPlant(Plant plant) async {
+      await _database.insert(
+        'plants', plant.toMap(), conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+  }
+
+  Future<List<Plant>> getPlants() async {
+ final List<Map<String, dynamic>> maps = await _database.query('plants');
+    return List.generate(maps.length, (i) {
+      return Plant(
+        plantId: maps[i]['id'],
+        plantSpecies: maps[i]['species'],
+        plantWateringTime: maps[i]['wateringTime'],
+        plantImage: maps[i]['image'],
+      );
+    });
+  }
+}
+  
+class Plant {
+  String plantId;
+  String plantSpecies;
+  int plantWateringTime;
+  String plantImage;
+
+  Plant({required this.plantId, required this.plantSpecies, required this.plantWateringTime, required this.plantImage });
+
+  Map<String, dynamic> toMap(){
+    return{
+      'id': plantId,
+      'species': plantSpecies,
+      'wateringTime' : plantWateringTime,
+      'image' : plantImage,
+    };
   }
 }

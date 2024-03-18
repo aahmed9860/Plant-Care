@@ -133,7 +133,7 @@ class Navigation extends StatelessWidget {
           onTap: () {
                Navigator.pop(context);
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context)=> const ViewPlants(),
+            builder: (context)=> ViewPlants(),
           )
           );
           },

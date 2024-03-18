@@ -28,6 +28,8 @@ dependencies:
 
   path: ^1.9.0
 
+  json_serializable: ^6.7.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
