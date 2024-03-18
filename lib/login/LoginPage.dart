@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plant_care/homeScreen.dart';
-import 'package:plant_care/Navigation.dart';
+import 'package:plantcare/HomeScreen.dart';
+import 'package:plantcare/Navigation.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
