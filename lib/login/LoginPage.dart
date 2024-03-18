@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:plant/HomeScreen.dart';
+import 'package:plant_care/homeScreen.dart';
+import 'package:plant_care/Navigation.dart';
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
   @override
 Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          image: DecorationImage(
-            image: AssetImage("assets/background.png"),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Column(
+  return Scaffold(
+      drawer: const Navigation(),
+      appBar: AppBar(
+
+      ),
+      body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
@@ -25,7 +23,7 @@ Widget build(BuildContext context) {
                 color: Colors.green[800],
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             TextFormField(
               decoration: InputDecoration(
                 labelText: 'Username',
@@ -34,7 +32,7 @@ Widget build(BuildContext context) {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextFormField(
               obscureText: true,
               decoration: InputDecoration(
@@ -44,7 +42,7 @@ Widget build(BuildContext context) {
                 ),
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             MaterialButton(
               onPressed: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -52,19 +50,19 @@ Widget build(BuildContext context) {
                 ));
               },
               color: Colors.green[800],
-              child: Text(
-                'Login',
-                style: TextStyle(color: Colors.white),
-              ),
-              padding: EdgeInsets.symmetric(vertical: 15.0),
+              
+              padding: const EdgeInsets.symmetric(vertical: 15.0),
               minWidth: double.infinity,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
+              child:  const Text(
+                'Login',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),
-      ),
     );
   }
 }

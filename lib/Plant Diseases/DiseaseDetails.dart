@@ -5,7 +5,8 @@ class DiseaseDetails extends StatelessWidget {
   final String diseaseName;
   final String diseaseSymptoms;
   final String diseaseCure;
-DiseaseDetails({required this.diseaseName, required this.diseaseSymptoms, required this.diseaseCure});
+  final String diseasePictures;
+DiseaseDetails({required this.diseaseName, required this.diseaseSymptoms, required this.diseaseCure, required this.diseasePictures});
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +17,36 @@ DiseaseDetails({required this.diseaseName, required this.diseaseSymptoms, requir
         title: Text(diseaseName),
 
       ),
-      body: Padding( 
+      body: SingleChildScrollView( 
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text( //listing ingredients
               "Symptoms:",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            Text(diseaseSymptoms), //received from HomeScreen
+             Text(diseaseSymptoms,
+            style: const TextStyle(fontSize: 18) ), //received from HomeScreen
             SizedBox(height: 20),
             const Text(
               "Cures:", //listing instructions
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            Text(diseaseCure), //received from HomeScreen
-            SizedBox(height:20),
+            Text(diseaseCure,
+            style: const TextStyle(fontSize: 18)), //received from HomeScreen
+            const SizedBox(height:20),
+             Center(
+              child : Image.asset(diseasePictures),
+            ),
+            ElevatedButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+              child: const Text("Return to Disease List?"),
+            )
           ],
+          
         ),
         ),
     );

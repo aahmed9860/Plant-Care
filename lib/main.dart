@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plant_care/HomeScreen.dart';
+import 'package:plant_care/homeScreen.dart';
+import 'package:plant_care/login/LoginPage.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -13,7 +14,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: HomeScreen(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const HomeScreen(),
       );
   }
 }
+

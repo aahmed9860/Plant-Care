@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:plant_care/login/LoginPage.dart';
-import 'HomeScreen.dart';
+import 'homeScreen.dart';
 import 'WateringSchedule.dart';
-import 'InputPlants.dart';
+import 'inputPlants.dart';
 import 'TipScreen.dart';
 import 'Plant Diseases/PlantDiseases.dart';
 import 'ViewPlants.dart';
@@ -63,7 +63,7 @@ class Navigation extends StatelessWidget {
           onTap: () {
                Navigator.pop(context);
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context)=> const LoginScreen(),
+            builder: (context)=> LoginPage(),
           )
           );
           },
@@ -133,7 +133,7 @@ class Navigation extends StatelessWidget {
           onTap: () {
                Navigator.pop(context);
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context)=> const ViewPlants(),
+            builder: (context)=> ViewPlants(),
           )
           );
           },
