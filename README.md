@@ -1,16 +1,5 @@
 # plantcare
+Ahmed Ahmed and Derek Evans
 
-A new Flutter project.
+This application is a meant for gardening lovers who are looking for a way to easily keep track of certain plants and to further their knowledge and passion for gardening. Unfortunately, some of the project, namely the database required portions, are not complete due to miscommunications and a few other factors. We apologize for this inconvenience, but we do hope you enjoy what our current apllication has to offer.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
